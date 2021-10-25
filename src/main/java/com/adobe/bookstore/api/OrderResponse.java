@@ -12,8 +12,8 @@ import java.util.Map;
 @Value
 @JsonDeserialize
 public class OrderResponse {
-  private final String orderId ;
-  private final Map<String, Integer> orderContents ;
+  private final String orderId;
+  private final Map<String, Integer> orderContents;
 
   @JsonCreator
   public OrderResponse(String orderId, Map<String, Integer> orderContents) {

@@ -2,10 +2,10 @@ package com.adobe.bookstore.api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Value;
 
 /**
  * A List of Orders in the service. Used as Response.
@@ -16,9 +16,8 @@ import lombok.Value;
 @JsonDeserialize
 public class OrdersList {
 
+  public static final OrdersList empty = new OrdersList(new ArrayList<>(0));
   private final List<OrderResponse> orders;
-
-  public static final OrdersList empty = new OrdersList(new ArrayList<>(0)) ;
 
   @JsonCreator
   public OrdersList(List<OrderResponse> orders) {

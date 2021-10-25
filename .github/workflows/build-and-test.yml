@@ -30,4 +30,4 @@ jobs:
           restore-keys: maven-repo-
 
       - name: "Test"
-        run: ./mnvw test
+        run: mnv test

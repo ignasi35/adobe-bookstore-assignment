@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Value;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -12,11 +14,14 @@ import java.util.Map;
 @Value
 @JsonDeserialize
 public class OrderResponse {
-  private final String orderId;
-  private final Map<String, Integer> orderContents;
+  private final UUID orderId;
+  private final Set<BookOrder> orderContents;
 
+  public OrderResponse(String orderId, Set<BookOrder> orderContents) {
+    this(UUID.fromString(orderId), orderContents);
+  }
   @JsonCreator
-  public OrderResponse(String orderId, Map<String, Integer> orderContents) {
+  public OrderResponse(UUID orderId, Set<BookOrder> orderContents) {
     this.orderId = orderId;
     this.orderContents = orderContents;
   }

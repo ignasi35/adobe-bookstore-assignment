@@ -1,4 +1,4 @@
-package com.adobe.bookstore.internal;
+package com.adobe.bookstore.framework;
 
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;

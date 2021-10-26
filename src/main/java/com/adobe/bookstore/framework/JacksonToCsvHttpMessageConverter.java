@@ -1,4 +1,4 @@
-package com.adobe.bookstore.internal;
+package com.adobe.bookstore.framework;
 
 import com.adobe.bookstore.api.CustomMediaType;
 import com.fasterxml.jackson.core.JsonEncoding;

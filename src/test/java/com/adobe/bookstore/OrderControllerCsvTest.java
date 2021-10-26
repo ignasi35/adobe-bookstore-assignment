@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class OrderControllerCsvTest extends AbstractOrderControllerTest{
+public class OrderControllerCsvTest extends AbstractOrderControllerTest {
 
   // NOTE: OrderControllerUnitTest is a WebMvcTest so my custom beans for
   // CSV support are not wired. This is an integration test with the only
@@ -25,7 +25,10 @@ public class OrderControllerCsvTest extends AbstractOrderControllerTest{
 
   @Autowired
   private MockMvc mvc;
-  public MockMvc mvc()  { return mvc;}
+
+  public MockMvc mvc() {
+    return mvc;
+  }
 
   @Test
   public void getListOfOrdersInCsvFormat() throws Exception {
@@ -47,8 +50,8 @@ public class OrderControllerCsvTest extends AbstractOrderControllerTest{
     mvc.perform(MockMvcRequestBuilders.get("/orders").accept(CustomMediaType.TEXT_CSV))
         .andExpect(status().isOk())
         .andExpect(content().string(equalTo(
-            "\"order_id\";\"book_id\";\"quantity\"\n"+
-            "\""+receipt.getOrderId().toString()+"\";\"22d580fc-d02e-4f70-9980-f9693c18f6e0\";1\n"
+            "\"order_id\";\"book_id\";\"quantity\"\n" +
+                "\"" + receipt.getOrderId().toString() + "\";\"22d580fc-d02e-4f70-9980-f9693c18f6e0\";1\n"
         )));
   }
 

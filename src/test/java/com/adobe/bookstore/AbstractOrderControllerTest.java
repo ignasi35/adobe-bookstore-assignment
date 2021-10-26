@@ -14,8 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public abstract class AbstractOrderControllerTest {
   public abstract MockMvc mvc();
 
-  public MvcResult postOrder(String payload ) throws Exception {
-    return  mvc().perform(
+  public MvcResult postOrder(String payload) throws Exception {
+    return mvc().perform(
         MockMvcRequestBuilders
             .post("/orders")
             .content(

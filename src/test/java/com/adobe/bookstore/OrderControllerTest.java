@@ -40,7 +40,7 @@ public class OrderControllerTest {
   }
 
   @Test
-  public void defaultTOJsonFormatWhenAcceptHeaderIsMissing() throws Exception {
+  public void defaultToJsonFormatWhenAcceptHeaderIsMissing() throws Exception {
     mvc.perform(MockMvcRequestBuilders.get("/orders"))
         .andExpect(status().isOk())
         .andExpect(header().string("Content-Type", "application/json"));

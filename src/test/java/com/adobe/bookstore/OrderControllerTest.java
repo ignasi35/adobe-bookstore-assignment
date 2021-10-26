@@ -1,22 +1,19 @@
 package com.adobe.bookstore;
 
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-
-import com.adobe.bookstore.api.BookOrder;
 import com.adobe.bookstore.api.CustomMediaType;
-import com.adobe.bookstore.api.OrderRequest;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.nio.charset.StandardCharsets;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -50,10 +47,19 @@ public class OrderControllerTest {
 
   @Test
   public void acceptsNewOrders() throws Exception {
-    BookOrder bookOrder = new BookOrder("22d580fc-d02e-4f70-9980-f9693c18f6e0", 1);
-    OrderRequest validOrder = new OrderRequest(bookOrder);
-    mvc.perform(MockMvcRequestBuilders.post("/orders", validOrder).accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
+    String bookId = "22d580fc-d02e-4f70-9980-f9693c18f6e0";
+    int quantity = 1;
+    String payload = String.format("{ \"items\": [{ \"book-id\": \"%s\",  \"quantity\": %d }] }", bookId, quantity);
+    mvc.perform(
+        MockMvcRequestBuilders
+            .post("/orders")
+            .content(
+                payload.getBytes(StandardCharsets.UTF_8)
+            )
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+    )
+        .andExpect(status().isCreated())
         .andExpect(header().string("Content-Type", "application/json"));
   }
 

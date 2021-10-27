@@ -18,6 +18,7 @@ import java.util.UUID;
 @JsonDeserialize
 @JsonPropertyOrder({"orderId", "bookId", "quantity"})
 public class CsvOrderRow {
+  // CSV headers use snake_case
   @JsonProperty("order_id")
   private final UUID orderId;
   @JsonProperty("book_id")
@@ -28,6 +29,7 @@ public class CsvOrderRow {
   public CsvOrderRow(String orderId, String bookId, int quantity) {
     this(UUID.fromString(orderId), bookId, quantity);
   }
+
   @JsonCreator
   public CsvOrderRow(UUID orderId, String bookId, int quantity) {
     this.orderId = orderId;

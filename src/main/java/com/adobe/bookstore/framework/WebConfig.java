@@ -1,4 +1,4 @@
-package com.adobe.bookstore.internal;
+package com.adobe.bookstore.framework;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

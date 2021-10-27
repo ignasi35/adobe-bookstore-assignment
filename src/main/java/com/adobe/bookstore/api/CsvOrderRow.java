@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Value;
 
+import java.util.UUID;
+
 /**
  * Presenting Order's in CSV requires flatting a hierarchical structure where a single order contains multiple books.
  * A CsvOrderRow is the flattened-out representation of a single book-id/quantity/order-id tuple.
@@ -16,15 +18,20 @@ import lombok.Value;
 @JsonDeserialize
 @JsonPropertyOrder({"orderId", "bookId", "quantity"})
 public class CsvOrderRow {
+  // CSV headers use snake_case
   @JsonProperty("order_id")
-  private final String orderId;
+  private final UUID orderId;
   @JsonProperty("book_id")
-  private final String bookId;
+  private final String bookId; // TODO: use UUID
   @JsonProperty("quantity")
   private final int quantity;
 
-  @JsonCreator
   public CsvOrderRow(String orderId, String bookId, int quantity) {
+    this(UUID.fromString(orderId), bookId, quantity);
+  }
+
+  @JsonCreator
+  public CsvOrderRow(UUID orderId, String bookId, int quantity) {
     this.orderId = orderId;
     this.bookId = bookId;
     this.quantity = quantity;

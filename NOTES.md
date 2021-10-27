@@ -19,7 +19,7 @@ The inventory Repo in the Order service will probably have to keep a stale copy 
 ### Create a new Order
 
 1. Controller with `POST /api/v1/orders`
-1. Order format: `{ "items": [{ "book-id": "",  "quantity": "" }, ...] }`
+1. Order format: `{ "items": [{ "book-id": "",  "quantity": n }, ...] }`
 1. `OrderREpository` VS `InventoryRepository` --> only place an order if there's enough stock to fulfill the complete order
 1. (NFR) Pre-load the inventory from the [provided JSON file](https://github.com/magento-mcom/springboot-interview-test/blob/main/stock.json)
 1. When placing an order, return a `201` status code with the `Unique Order Identifier`

@@ -1,10 +1,12 @@
 package com.adobe.bookstore.api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Value;
 
-import java.util.Map;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -12,12 +14,20 @@ import java.util.Map;
 @Value
 @JsonDeserialize
 public class OrderResponse {
-  private final String orderId;
-  private final Map<String, Integer> orderContents;
+  @JsonProperty("order-id")
+  private final UUID orderId;
+  @JsonProperty("items")
+  private final List<BookOrder> items;
+
+  public OrderResponse(String orderId, List<BookOrder> items) {
+    this(UUID.fromString(orderId), items);
+  }
 
   @JsonCreator
-  public OrderResponse(String orderId, Map<String, Integer> orderContents) {
+  public OrderResponse(@JsonProperty("order-id") UUID orderId,
+                       @JsonProperty("items")
+                           List<BookOrder> items) {
     this.orderId = orderId;
-    this.orderContents = orderContents;
+    this.items = items;
   }
 }

@@ -31,17 +31,12 @@ The inventory Repo in the Order service will probably have to keep a stale copy 
 
 ## NFR
 
-resilience
-
-circuit breaking
-
-exponential back-off
-
-concurrent access
-
-ledgers of changes
-
-projections(?)
+- resilience
+    - circuit breaking
+    - exponential back-off
+- concurrent access
+- ledgers of changes
+- projections(?)
 
 local copies of data in case the downstream service is down.
 
